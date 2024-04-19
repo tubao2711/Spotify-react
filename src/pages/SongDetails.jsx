@@ -39,25 +39,18 @@ const SongDetails = () => {
     <div className="flex flex-col">
       <DetailsHeader artistId={artistId} songData={songData} />
       <div className="mb-10 ">
-        <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
-        <div className="mt-5">
-          {songData?.type === 'lyrics' ? (
-            songData?.text.map((line, i) => (
-              <p className="text-gray-400 text-base my-1">{line}</p>
-            ))
-          ) : (
-            <p className="text-gray-400 text-base my-1">
-              Sorry, no lyrics found!
-            </p>
-          )}
-        </div>
+        <h2 className="text-white text-3xl font-bold">Details:</h2>
+        <div className="mt-5 text-white">{songData?.share?.snapchat}</div>
+        <div className="mt-5 text-white">{songData?.share?.subject}</div>
+        <div className="mt-5 text-white">{songData?.share?.text}</div>
+        {/* <h2 className="text-white text-3xl font-bold">No lyrics has found!</h2> */}
       </div>
       <RelatedSongs
         data={data}
         isPlaying={isPlaying}
         activeSong={activeSong}
         handlePauseClick={handlePauseClick}
-        handlePlayClick={() => handlePlayClick(song, i)}
+        handlePlayClick={handlePlayClick}
         artistId={artistId}
       />
     </div>
