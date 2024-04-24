@@ -30,6 +30,10 @@ export const shazamCoreApi = createApi({
       query: (searchTerm) =>
         `/search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}`,
     }),
+    getVideoYoutube: builder.query({
+      query: (songName) =>
+        `/tracks/youtube-video?track_id=123&name=${songName}`,
+    }),
   }),
 });
 
@@ -40,4 +44,5 @@ export const {
   useGetSongsByCountryQuery,
   useGetSongByGenreQuery,
   useGetSongBySearchQuery,
+  useGetVideoYoutubeQuery,
 } = shazamCoreApi;

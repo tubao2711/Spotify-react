@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import { useSelector, useDispatch } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 import { setActiveSong, playPause } from '../redux/features/playerSlice';
 import {
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
+  useGetVideoYoutubeQuery,
 } from '../redux/services/shazamCore';
 
 const SongDetails = () => {
@@ -20,6 +22,15 @@ const SongDetails = () => {
   } = useGetSongRelatedQuery({
     songid,
   });
+  const songName = songData?.alias;
+
+  const {
+    data: videoData,
+    isfetching: isFetchingVideo,
+    error: errVideo,
+  } = useGetVideoYoutubeQuery(songName);
+  console.log(videoData);
+  console.log(videoData?.actions?.type);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -32,9 +43,8 @@ const SongDetails = () => {
 
   if (isFetchingRelatedSong || isfetchingSongDetails)
     return <Loader title="Searching song details" />;
-  if (error) return <Error />;
+  if (error && errVideo) return <Error />;
 
-  console.log(data);
   return (
     <div className="flex flex-col">
       <DetailsHeader artistId={artistId} songData={songData} />
@@ -43,7 +53,7 @@ const SongDetails = () => {
         <div className="mt-5 text-white">{songData?.share?.snapchat}</div>
         <div className="mt-5 text-white">{songData?.share?.subject}</div>
         <div className="mt-5 text-white">{songData?.share?.text}</div>
-        {/* <h2 className="text-white text-3xl font-bold">No lyrics has found!</h2> */}
+        <ReactPlayer url={videoData.actions?.uri} />
       </div>
       <RelatedSongs
         data={data}

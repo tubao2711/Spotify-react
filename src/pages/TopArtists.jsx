@@ -1,9 +1,9 @@
 import React from 'react';
 import { Error, Loader, ArtistCard } from '../components';
-import { useGetTopChartsQuery } from '../redux/services/shazamCore';
+import { useGetSongByGenreQuery } from '../redux/services/shazamCore';
 
 const TopArtists = () => {
-  const { data, isFetching, error } = useGetTopChartsQuery();
+  const { data, isFetching, error } = useGetSongByGenreQuery('DANCE');
 
   if (isFetching) return <Loader title="Loading songs around you..." />;
   if (error) return <Error />;
