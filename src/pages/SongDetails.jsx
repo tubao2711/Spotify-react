@@ -29,8 +29,8 @@ const SongDetails = () => {
     isfetching: isFetchingVideo,
     error: errVideo,
   } = useGetVideoYoutubeQuery(songName);
-  console.log(videoData);
-  console.log(videoData?.actions?.type);
+  // console.log(videoData);
+  // console.log(videoData?.actions?.type);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -53,7 +53,7 @@ const SongDetails = () => {
         <div className="mt-5 text-white">{songData?.share?.snapchat}</div>
         <div className="mt-5 text-white">{songData?.share?.subject}</div>
         <div className="mt-5 text-white">{songData?.share?.text}</div>
-        <ReactPlayer url={videoData.actions?.uri} />
+        {/* <ReactPlayer url={videoData.actions?.uri} /> */}
       </div>
       <RelatedSongs
         data={data}
