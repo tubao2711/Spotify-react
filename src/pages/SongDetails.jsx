@@ -29,8 +29,8 @@ const SongDetails = () => {
     isfetching: isFetchingVideo,
     error: errVideo,
   } = useGetVideoYoutubeQuery(songName);
-  // console.log(videoData);
-  // console.log(videoData?.actions?.type);
+  console.log(videoData);
+  console.log(videoData?.actions.share);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));

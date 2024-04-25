@@ -3,25 +3,25 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Error, Loader, SongCard } from '../components';
-import { useGetSongsByCountryQuery } from '../redux/services/shazamCore';
+import { useGetSongByGenreQuery } from '../redux/services/shazamCore';
 
 const AroundYou = () => {
-  const [country, setCountry] = useState('');
+  // const [country, setCountry] = useState('');
   const [loading, setLoading] = useState(true);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { data, isFetching, error } = useGetSongsByCountryQuery(country);
+  const { data, isFetching, error } = useGetSongByGenreQuery('COUNTRY');
 
-  console.log(country);
-  useEffect(() => {
-    // at_tDmlfP7MQkNwktWVJsUzaDVDmvQzy
-    axios
-      .get(
-        'https://geo.ipify.org/api/v2/country?apiKey=at_tDmlfP7MQkNwktWVJsUzaDVDmvQzy'
-      )
-      .then((res) => setCountry(res?.data?.location?.country))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, [country]);
+  // console.log(country);
+  // useEffect(() => {
+  //   at_tDmlfP7MQkNwktWVJsUzaDVDmvQzy
+  //   axios
+  //     .get(
+  //       'https://geo.ipify.org/api/v2/country?apiKey=at_tDmlfP7MQkNwktWVJsUzaDVDmvQzy'
+  //     )
+  //     .then((res) => setCountry(res?.data?.location?.country))
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false));
+  // }, [country]);
 
   if (isFetching && loading)
     return <Loader title="Loading songs around you..." />;
@@ -30,7 +30,7 @@ const AroundYou = () => {
   return (
     <div className="flex flex-col">
       <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">
-        Around you <span className="font-black">{country}</span>
+        Around you <span className="font-black">VN</span>
       </h2>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
